@@ -1,0 +1,72 @@
+import { Box, FormHelperText, FormLabel, MenuItem, Select, TextField } from '@mui/material';
+import axios from 'axios';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import ModalDialog from './ModalDialog';
+
+const UpdateTaskModal = ({ data, open, onClose }) => {
+  const {
+    reset,
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    values: {
+      id: data.id,
+      title: data.title || '',
+      description: data.description || '',
+      status: data.status || '',
+    },
+  });
+
+  console.log(watch('status'));
+
+  const onSubmit = handleSubmit((data) => {
+    axios
+      .put(`http://localhost:5000/tasks/${data.id}`, data)
+      .then(() => {
+        onClose();
+        reset();
+        toast.success('Success!');
+      })
+      .catch(() => {
+        toast.error('Something went wrong!');
+      });
+  });
+
+  const handleClose = () => {
+    onClose();
+    reset();
+  };
+
+  return (
+    <ModalDialog title="Update task" open={open} onClose={handleClose} onSubmit={onSubmit}>
+      <form onSubmit={onSubmit}>
+        <Box display="flex" flexDirection="column" gap={2}>
+          <Box display="flex" flexDirection="column" gap={1}>
+            <FormLabel>Title</FormLabel>
+            <TextField {...register('title', { required: true })} />
+            {errors.title && <FormHelperText sx={{ color: 'red' }}>This field is required</FormHelperText>}
+          </Box>
+
+          <Box display="flex" flexDirection="column" gap={1}>
+            <FormLabel>Description</FormLabel>
+            <TextField {...register('description', { required: true })} multiline rows={4} />
+            {errors.description && <FormHelperText sx={{ color: 'red' }}>This field is required</FormHelperText>}
+          </Box>
+
+          <Box display="flex" flexDirection="column" gap={1}>
+            <FormLabel>Status</FormLabel>
+            <Select {...register('status', { required: true })} value={watch('status')}>
+              <MenuItem value="Incomplete">Incomplete</MenuItem>
+              <MenuItem value="Completed">Completed</MenuItem>
+            </Select>
+          </Box>
+        </Box>
+      </form>
+    </ModalDialog>
+  );
+};
+
+export default UpdateTaskModal;
