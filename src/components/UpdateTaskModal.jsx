@@ -1,7 +1,7 @@
 import { Box, FormHelperText, FormLabel, MenuItem, Select, TextField } from '@mui/material';
-import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import { api } from '../config/api';
 import ModalDialog from './ModalDialog';
 
 const UpdateTaskModal = ({ data, open, onClose }) => {
@@ -21,8 +21,8 @@ const UpdateTaskModal = ({ data, open, onClose }) => {
   });
 
   const onSubmit = handleSubmit((data) => {
-    axios
-      .put(`${import.meta.env.VITE_API_URL}/tasks/${data.id}`, data)
+    api
+      .put(`tasks/${data.id}`, data)
       .then(() => {
         onClose();
         reset();

@@ -13,12 +13,12 @@ import {
   Typography,
 } from '@mui/material';
 import Container from '@mui/material/Container';
-import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AddTaskModal from './components/AddTaskModal';
 import UpdateTaskModal from './components/UpdateTaskModal';
+import { api } from './config/api';
 
 const App = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
@@ -36,21 +36,19 @@ const App = () => {
   const [tasks, setTasks] = useState([]);
   const [status, setStatus] = useState('*');
 
-  console.log(import.meta.env.VITE_API_URL);
-
   const getListData = useCallback(async () => {
     let response;
 
     if (status != '*') {
-      response = await axios.get(`${import.meta.env.VITE_API_URL}/tasks?status=${status}`);
+      response = await api.get(`tasks?status=${status}`);
     } else {
-      response = await axios.get(`${import.meta.env.VITE_API_URL}/tasks`);
+      response = await api.get('tasks');
     }
     setTasks(response.data);
   }, [status]);
 
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:5000/tasks/${id}`).then(() => {
+    await api.delete(`tasks/${id}`).then(() => {
       toast.success('Success!');
       getListData();
     });

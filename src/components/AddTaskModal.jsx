@@ -1,7 +1,7 @@
 import { Box, FormHelperText, FormLabel, TextField } from '@mui/material';
-import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import { api } from '../config/api';
 import ModalDialog from './ModalDialog';
 
 const AddTaskModal = ({ open, onClose }) => {
@@ -13,8 +13,8 @@ const AddTaskModal = ({ open, onClose }) => {
   } = useForm();
 
   const onSubmit = handleSubmit((data) => {
-    axios
-      .post(`${import.meta.env.VITE_API_URL}/tasks`, { ...data, status: 'Incomplete' })
+    api
+      .post('/tasks', { ...data, status: 'Incomplete' })
       .then(() => {
         onClose();
         reset();
