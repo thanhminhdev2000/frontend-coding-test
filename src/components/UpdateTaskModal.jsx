@@ -20,11 +20,9 @@ const UpdateTaskModal = ({ data, open, onClose }) => {
     },
   });
 
-  console.log(watch('status'));
-
   const onSubmit = handleSubmit((data) => {
     axios
-      .put(`http://localhost:5000/tasks/${data.id}`, data)
+      .put(`${import.meta.env.VITE_API_URL}/tasks/${data.id}`, data)
       .then(() => {
         onClose();
         reset();
@@ -46,19 +44,19 @@ const UpdateTaskModal = ({ data, open, onClose }) => {
         <Box display="flex" flexDirection="column" gap={2}>
           <Box display="flex" flexDirection="column" gap={1}>
             <FormLabel>Title</FormLabel>
-            <TextField {...register('title', { required: true })} />
+            <TextField {...register('title', { required: true })} size="small" />
             {errors.title && <FormHelperText sx={{ color: 'red' }}>This field is required</FormHelperText>}
           </Box>
 
           <Box display="flex" flexDirection="column" gap={1}>
             <FormLabel>Description</FormLabel>
-            <TextField {...register('description', { required: true })} multiline rows={4} />
+            <TextField {...register('description', { required: true })} size="small" multiline rows={4} />
             {errors.description && <FormHelperText sx={{ color: 'red' }}>This field is required</FormHelperText>}
           </Box>
 
           <Box display="flex" flexDirection="column" gap={1}>
             <FormLabel>Status</FormLabel>
-            <Select {...register('status', { required: true })} value={watch('status')}>
+            <Select {...register('status', { required: true })} value={watch('status')} size="small">
               <MenuItem value="Incomplete">Incomplete</MenuItem>
               <MenuItem value="Completed">Completed</MenuItem>
             </Select>

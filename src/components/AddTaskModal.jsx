@@ -14,7 +14,7 @@ const AddTaskModal = ({ open, onClose }) => {
 
   const onSubmit = handleSubmit((data) => {
     axios
-      .post('http://localhost:5000/tasks', { ...data, status: 'Incomplete' })
+      .post(`${import.meta.env.VITE_API_URL}/tasks`, { ...data, status: 'Incomplete' })
       .then(() => {
         onClose();
         reset();
@@ -36,13 +36,13 @@ const AddTaskModal = ({ open, onClose }) => {
         <Box display="flex" flexDirection="column" gap={2}>
           <Box display="flex" flexDirection="column" gap={1}>
             <FormLabel>Title</FormLabel>
-            <TextField {...register('title', { required: true })} />
+            <TextField {...register('title', { required: true })} size="small" />
             {errors.title && <FormHelperText sx={{ color: 'red' }}>This field is required</FormHelperText>}
           </Box>
 
           <Box display="flex" flexDirection="column" gap={1}>
             <FormLabel>Description</FormLabel>
-            <TextField {...register('description', { required: true })} multiline rows={4} />
+            <TextField {...register('description', { required: true })} size="small" multiline rows={4} />
             {errors.description && <FormHelperText sx={{ color: 'red' }}>This field is required</FormHelperText>}
           </Box>
         </Box>

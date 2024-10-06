@@ -13,6 +13,7 @@ const style = {
   bgcolor: 'background.paper',
   padding: 2,
   border: 'none',
+  outline: 'none',
 };
 
 const ModalDialog = ({ title, open, onClose, onSubmit, children }) => {

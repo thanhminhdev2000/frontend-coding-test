@@ -36,13 +36,15 @@ const App = () => {
   const [tasks, setTasks] = useState([]);
   const [status, setStatus] = useState('*');
 
+  console.log(import.meta.env.VITE_API_URL);
+
   const getListData = useCallback(async () => {
     let response;
 
     if (status != '*') {
-      response = await axios.get(`http://localhost:5000/tasks?status=${status}`);
+      response = await axios.get(`${import.meta.env.VITE_API_URL}/tasks?status=${status}`);
     } else {
-      response = await axios.get('http://localhost:5000/tasks');
+      response = await axios.get(`${import.meta.env.VITE_API_URL}/tasks`);
     }
     setTasks(response.data);
   }, [status]);
@@ -66,11 +68,11 @@ const App = () => {
         </Typography>
 
         <Box display="flex" justifyContent="space-between" marginY={5}>
-          <Button variant="contained" onClick={handleOpenAddModal}>
+          <Button variant="contained" onClick={handleOpenAddModal} size="small">
             Add Task
           </Button>
 
-          <Select sx={{ width: 200 }} value={status} onChange={(e) => setStatus(e.target.value)}>
+          <Select sx={{ width: 200 }} value={status} onChange={(e) => setStatus(e.target.value)} size="small">
             <MenuItem value="*">All</MenuItem>
             <MenuItem value="Incomplete">Incomplete</MenuItem>
             <MenuItem value="Completed">Completed</MenuItem>
