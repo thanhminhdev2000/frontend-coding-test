@@ -10,6 +10,7 @@ This is a simple Task Management application built with React, MUI (Material-UI)
 - [Running the Application](#running-the-application)
 - [Features](#features)
 - [Folder Structure](#folder-structure)
+- [Dependencies](#dependencies)
 
 ## Getting Started
 

@@ -18,7 +18,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AddTaskModal from './components/AddTaskModal';
 import UpdateTaskModal from './components/UpdateTaskModal';
-import { api } from './config/api';
+import api from './config/api';
 
 const App = () => {
   const [openAddModal, setOpenAddModal] = useState(false);

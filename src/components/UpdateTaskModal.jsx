@@ -1,7 +1,7 @@
 import { Box, FormHelperText, FormLabel, MenuItem, Select, TextField } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { api } from '../config/api';
+import api from '../config/api';
 import ModalDialog from './ModalDialog';
 
 const UpdateTaskModal = ({ data, open, onClose }) => {
