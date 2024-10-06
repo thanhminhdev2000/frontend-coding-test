@@ -74,15 +74,14 @@ src/
 │   ├── AddTaskModal.jsx
 │   ├── UpdateTaskModal.jsx
 │   ├── ModalDialog.jsx
-
+```
 
 ## Dependencies
 
 The project uses the following key dependencies:
+
 - `@mui/material` and `@mui/icons-material`: For UI components.
 - `axios`: For making HTTP requests to the backend.
 - `react-hook-form`: For handling forms and validation.
 - `react-toastify`: For displaying notifications.
 - `react`: The main framework for building the UI.
-
-```
