@@ -91,7 +91,16 @@ const App = () => {
 
             <TableBody>
               {tasks.map((row, index) => (
-                <TableRow key={row.id} onClick={() => handleOpenUpdateModal(row)}>
+                <TableRow
+                  sx={{
+                    '&:hover': {
+                      backgroundColor: '#f5f5f5',
+                      cursor: 'pointer',
+                    },
+                  }}
+                  key={row.id}
+                  onClick={() => handleOpenUpdateModal(row)}
+                >
                   <TableCell>{index + 1}</TableCell>
                   <TableCell>{row.title}</TableCell>
                   <TableCell>{row.description}</TableCell>
@@ -127,7 +136,7 @@ const App = () => {
 
           {tasks.length == 0 && (
             <Box height={100} display="flex" justifyContent="center" alignItems="center">
-              <Typography>No data</Typography>
+              <Typography>No data available</Typography>
             </Box>
           )}
         </TableContainer>
